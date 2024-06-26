@@ -2,6 +2,7 @@ NavBarItems = [
     {"name": "about", "link": "/aboutme"},
     {"name": "hobbies", "link": "/hobbies"},
     {"name": "projects", "link": "/projects"},
+    {"name": "locations", "link": "/map"}
 ]
 
 FooterItems = [
@@ -38,10 +39,25 @@ Projects = [
     },
 ]
 
+
 HobbyHeader = {
-    "title": "hobbies & blogs.",
-    "subtitle": "come check out my blog!",
+    "title": "Hobbies",
+    "subtitle": "come check out my hobbies!",
     "line1": "from traveling to trying out new recipes during my spare time, i have a lot of diff. hobbies.",
     "line2": "let's see if we have any hobbies in common!",
     "image": "../static/img/hobbies.webp",
 }
+
+
+Hobbies = [
+    {
+        "title": "Gaming",
+        "description": "I enjoy playing games such as Valorant and League of Legends",
+        "image": "../static/img/gaming.jpg"
+    },
+    {
+        "title": "Working Out",
+        "description": "I enjoy going to the gym and lifting weights",
+        "image": "../static/img/workingout.jpg"
+    }
+]

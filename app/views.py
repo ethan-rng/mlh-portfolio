@@ -14,16 +14,14 @@ def hero():
 def about_me():
     return render_template('routes/aboutme/about_me.html', navbar=data.NavBarItems, footer=data.FooterItems)
 
-
 # Blogs
 @views.route('/hobbies')
 def blog():
-    return render_template('routes/hobbies/hobbies.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.HobbyHeader)
+    return render_template('routes/hobbies/hobbies.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.HobbyHeader, hobbies=data.Hobbies)
 
 @views.route('/hobbies/<int:post_id>')
 def blog_post(post_id):
     return render_template('routes/hobbies/hobby.html', navbar=data.NavBarItems, footer=data.FooterItems, id=post_id)
-
 
 # Projects
 @views.route('/projects')
@@ -34,5 +32,8 @@ def project():
 def project_post(project_id):
     return render_template('routes/projects/project.html', navbar=data.NavBarItems, footer=data.FooterItems, id=project_id)
 
+@views.route('/map')
+def map():
+    return render_template('routes/map/map.html', navbar=data.NavBarItems, footer=data.FooterItems)
 
 

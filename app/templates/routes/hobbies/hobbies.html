@@ -7,25 +7,17 @@
 
   <!-- Hobbies Section -->
 
-  <!-- Travel Section -->
-  <div id="travel" class="w-4/5">
-    <div id="map" class="w-full">
-      <h1 class="">Places I've Visited</h1>
+<body>
+    
+    {% for hobby in hobbies %}
+        <h3>{{ hobby.title }}</h3>
+        <p>{{ hobby.description }}</p>
+        <p><img src="{{ hobby.image }}" alt="{{ hobby.name }}"></p>
+    {% endfor %}
 
-      <!-- Map of the World -->
-      <div
-        id="maparea"
-        class="w-[100vh]"
-      >
-        <!-- JS to Make Map Work -->
-        <script
-          src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-          integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-          crossorigin=""
-        ></script>
-      </div>
-    </div>
-  </div>
+
+</body>
+
 
 	<!-- Blog Section -->
 	<div>
