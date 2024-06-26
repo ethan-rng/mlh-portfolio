@@ -2,13 +2,21 @@
 
 
 {% block content %}
-<main class="w-full flex flex-col items-center">
     {% include 'common/header.html' with context %}
 
-    {%- for project in projects %}
-    
+    <main class="w-full flex flex-col items-center my-16 mb-32">
 
-    {%- endfor %}
+        {%- for project in projects %}
+            <a href="{{ project.link }}" class="hover:scale-105 transition-transform duration-300 ease-in-out flex flex-row border-dashed border-2 w-4/5 h-[24rem] bg-secondary mb-10 px-10">
+                <div class="w-2/3 py-10 pr-16 flex flex-col justify-center items-center">
+                    <h2 class="w-full text-left text-5xl font-bold text-font/80">{{ project.title }}</h2>
+                    <h3 class="text-2xl mt-4 font-light text-font/80">{{ project.description }}</h2>
+                </div>
+                <div class="w-2/5 flex flex-row justify-center items-center">
+                    <img src="{{ project.image }}" class="pl-6 py-10 border-l-4 border-dashed w-full h-full object-cover"/>
+                </div>
+            </a>
+        {%- endfor %}
 
-</main>
+    </main>
 {% endblock %}

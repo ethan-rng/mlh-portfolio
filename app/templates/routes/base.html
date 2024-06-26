@@ -12,6 +12,7 @@
                     />
                 </a>
             </span>
+            
             <!-- A Menu Bar that dynamically displays other pages in the app. -->
             <span class="flex flex-row justify-end w-1/2 text-lg">
                 {%- for item in navbar %}
@@ -23,7 +24,7 @@
     </div>
 
     <!-- Main Content -->
-    <main class="flex flex-col items-center w-full py-24 pb-16">
+    <main class="flex flex-col items-center w-full pt-24">
         {% block content %}
         {% endblock %}
     </main>

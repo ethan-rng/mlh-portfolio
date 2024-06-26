@@ -12,25 +12,18 @@ def hero():
 # About Me
 @views.route('/aboutme')
 def about_me():
-    return render_template('routes/aboutme/about_me.html', navbar=data.NavBarItems, footer=data.FooterItems)
+    return render_template('routes/aboutme/about_me.html', navbar=data.NavBarItems, footer=data.FooterItems, timeline=data.WorkExperience)
 
 # Blogs
 @views.route('/hobbies')
 def blog():
-    return render_template('routes/hobbies/hobbies.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.HobbyHeader, hobbies=data.Hobbies)
-
-@views.route('/hobbies/<int:post_id>')
-def blog_post(post_id):
-    return render_template('routes/hobbies/hobby.html', navbar=data.NavBarItems, footer=data.FooterItems, id=post_id)
+    return render_template('routes/hobbies/hobbies.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.HobbyHeader, hobbies=data.Hobby)
 
 # Projects
 @views.route('/projects')
 def project():
-    return render_template('routes/projects/projects.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.ProjectsHeader)
+    return render_template('routes/projects/projects.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.ProjectsHeader, projects=data.Projects )
 
-@views.route('/projects/<int:project_id>')
-def project_post(project_id):
-    return render_template('routes/projects/project.html', navbar=data.NavBarItems, footer=data.FooterItems, id=project_id)
 
 @views.route('/map')
 def map():

@@ -1,0 +1,14 @@
+<div
+  class="flex flex-col w-full sm:w-2/5 text-pretty bg-secondary border-dashed border-2 py-12 px-8"
+>
+  <h1 class="font-extrabold mt-5 text-3xl">{{ item.title }}</h1>
+  <p class="font-thin ml-3 mt-2 text-2xl">{{ item.description }}</p>
+
+  <div class="w-full mt-3 flex flex-row items-center justify-center flex-wrap">
+    {%- for tag in item.tags %}
+        <div class="border-[1px] border-font rounded-3xl px-4 py-1 mx-2 my-2 text-font bg-secondary hover:bg-font hover:text-secondary transition-ease hover:text-secondary hover:border-secondary/80 transition duration-500">
+          {{ tag }}
+        </div>
+    {%- endfor %}
+  </div>
+</div>
