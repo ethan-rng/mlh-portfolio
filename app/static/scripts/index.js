@@ -10,8 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     // Hospital LMAO
-    var marker = L.marker([43.7688, -79.3627]).addTo(map);
-    marker.bindPopup("<h2 style='color:black;'>North York General Hospital</h2><h3 style='color:black;'>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>");
+    var marker = L.marker([14.5995, 120.9842]).addTo(map);
+    marker.bindPopup("<h2 style='color:black;'>Manilla, Philippines</h2><h3 style='color:black;'>lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h3>");
 
     // Honolulu
     var marker = L.marker([21.3099, -157.8581]).addTo(map);
