@@ -2,6 +2,7 @@ NavBarItems = [
     {"name": "about", "link": "/aboutme"},
     {"name": "hobbies", "link": "/hobbies"},
     {"name": "projects", "link": "/projects"},
+    {"name": "experience", "link": "/experience"}
 ]
 
 FooterItems = [
@@ -10,9 +11,20 @@ FooterItems = [
     {"name": "github", "link": "https://github.com/ethan-rng"},
 ]   
 
-WorkExperience = []
-
-
+WorkExperience = [
+    {
+    "title": "Software Engineer",
+    "company": "Amazon",
+    "location": "Seattle, Washington",
+    "duration": "May 2023 - June 2024"
+    },
+    {
+    "title": "Data Analyst",
+    "company": "Meta",
+    "location": "San Francisco, California",
+    "duration": "January 2021 - March 2022"
+    },
+]
 
 
 ProjectsHeader = {
@@ -45,3 +57,4 @@ HobbyHeader = {
     "line2": "let's see if we have any hobbies in common!",
     "image": "../static/img/hobbies.webp",
 }
+

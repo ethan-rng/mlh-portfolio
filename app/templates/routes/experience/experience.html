@@ -1,0 +1,29 @@
+{% extends 'routes/base.html' %}
+
+{% block content %}
+<style>
+    .work-experience {
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    .work-experience h2 {
+        font-size: 18px;
+        margin-bottom: 5px;
+    }
+    .work-experience p {
+        margin: 0;
+    }
+</style>
+
+<h1>Work Experience</h1>
+{% for experience in work_experiences %}
+    <div class="work-experience">
+        <h2>{{ experience.title }}</h2>
+        <p>Company: {{ experience.company }}</p>
+        <p>Location: {{ experience.location }}</p>
+        <p>Duration: {{ experience.duration }}</p>
+    </div>
+{% endfor %}
+{% endblock %}

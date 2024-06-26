@@ -34,5 +34,9 @@ def project():
 def project_post(project_id):
     return render_template('routes/projects/project.html', navbar=data.NavBarItems, footer=data.FooterItems, id=project_id)
 
+# Experience
+@views.route('/experience')
+def experience():
+    return render_template('routes/experience/experience.html', work_experiences=data.WorkExperience)
 
 
