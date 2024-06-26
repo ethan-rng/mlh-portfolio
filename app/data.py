@@ -14,8 +14,6 @@ FooterItems = [
 WorkExperience = []
 
 
-
-
 ProjectsHeader = {
     "title": "projects & misc.",
     "subtitle": "come check out my projects!",
