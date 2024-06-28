@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-import data
+from app import data
 
 views = Blueprint('views', __name__, template_folder='templates')
 
