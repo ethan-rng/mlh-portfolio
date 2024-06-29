@@ -1,0 +1,63 @@
+{% extends 'routes/base.html' %} 
+
+{% block content %}
+
+<!-- Work Experience Section -->
+<div
+class="w-screen -mb-[12rem] pb-16 left-1/2 right-1/2 ml-[-50vw] mr-[-50vw] flex flex-col items-center justify-center"
+>
+<!-- ^ css used to by pass w-4/5 restriction imposed by base.html -->
+
+<!-- Header -->
+<div class="mt-16 flex flex-row justify-between w-4/5">
+  <div class="text-6xl font-semibold text-font">
+    <h2 class="">some of my</h2>
+    <h2 class="">work experience.</h2>
+  </div>
+  <div class="text-right text-2xl font-light text-font w-1/4">
+    Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quod assumenda expedita labore m
+
+  </div>
+</div>
+
+<!-- Timeline -->
+<div class="w-full h-full">
+  <div class="mt-8 flex flex-col items-center justify-center ">
+    {%- for item in timeline %} 
+      <div class="z-20 flex flex-row py-8 w-4/5">
+        {% if item.index % 2 == 0 %} 
+          {% include 'common/imageCard.html' with context %}
+        {% else %} 
+          {% include 'common/descriptionCard.html' with context %}
+        {% endif %} 
+
+        <!-- Timeline Bar Thing-->
+        <div class="flex flex-col justify-center items-center mx-8 h-auto">
+            <div class="w-8 h-full flex flex-col justify-center items-center">
+                <!-- Weird Ball Thing -->
+                {% if item.index == 0 %}
+                    <div class="p-4 bg-secondary rounded-full"></div>
+                {% endif %}
+
+                <p class="{{ item.margin }} vertical-text font-extrabold text-3xl text-font">
+                    {{ item.date }}
+                </p>
+                <!-- Vertical Bar -->
+                <div class="h-[90%] -mt-10 w-2 {% if item.index == 0 %} rounded-b-full {% else %} rounded-full {% endif %} bg-secondary"></div>
+            </div>
+        </div>
+
+        {% if item.index % 2 == 0 %} 
+          {% include 'common/descriptionCard.html' with context %}
+        {% else %} 
+          {% include 'common/imageCard.html' with context %}
+        {% endif %} 
+
+      </div>
+    {%- endfor %}
+  </div>
+</div>
+</div>
+</main>
+
+{% endblock %}

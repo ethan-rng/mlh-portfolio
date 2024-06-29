@@ -1,0 +1,39 @@
+{% extends 'routes/base.html' %} {% block content %}
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<main class="w-full flex flex-col items-center">
+
+
+ <!-- Travel Section -->
+ <div id="travel" class="w-4/5 border-dashed border-2 bg-secondary my-32 text-center p-16">
+  <div id="map" class="w-full">
+  <div class="flex flex-col justify-center items-center">
+    <h2 class="text-6xl font-semibold text-font my-8">places i've visited.</h2>
+    <h3 class="text-2xl font-light text-font/40 mb-10 w-3/5">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae, maiores magni, corporis minima esse molestiae repellendus aspernatur soluta numquam beatae ea ipsa expedita vel facere sit. Eligendi libero quam dolorum.
+    </h3>
+  </div>
+    <!-- Map of the World -->
+    <div
+      id="maparea"
+      class="z-0"
+    >
+      <!-- JS to Make Map Work -->
+      <script
+        src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
+        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
+        crossorigin=""
+      ></script>
+    </div>
+  </div>
+</div>
+
+<!-- Blog Section -->
+<div>
+
+</div>
+</main>
+
+{% endblock %}

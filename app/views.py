@@ -24,6 +24,10 @@ def blog():
 def project():
     return render_template('routes/projects/projects.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.ProjectsHeader, projects=data.Projects )
 
+@views.route('/experience')
+def experience():
+    return render_template('routes/experience/experience.html', navbar=data.NavBarItems, footer=data.FooterItems, timeline=data.WorkExperience)
 
-
-
+@views.route('/map')
+def map():
+    return render_template('routes/map/map.html', navbar=data.NavBarItems, footer=data.FooterItems)
