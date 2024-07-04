@@ -36,7 +36,7 @@ You need to do all your progress here.
 
 ## Installation
 
-Make sure you have python3 and pip installed
+Make sure you have python3 and pip installed!
 
 Create and activate virtual environment using virtualenv
 ```bash
@@ -70,7 +70,7 @@ You should get a response like this in the terminal:
 
 You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
 
-*Note: The portfolio site will only work on your local machine while you have it running inside of your terminal. We'll go through how to host it in the cloud in the next few weeks!* 
+*Note: The portfolio site will only work on your local machine while you have it running inside of your terminal. We'll go through how to host it in the cloud in the next few weeks!*
 
 ## Contributing
 
