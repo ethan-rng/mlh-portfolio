@@ -18,7 +18,7 @@ WorkExperience = [
         "title": "prod. engineering fellow",
         "image": "../static/img/work/mlh.jpeg",
         "company": "microsoft",
-        "location": "redmond, wa",
+        "location": "bakersfield, ca",
         "date": "jun 2024 - present",
         "margin": "ml-[15.5rem]",
         "tags": ["python", "java", "typeScript", "react", "azure"],
