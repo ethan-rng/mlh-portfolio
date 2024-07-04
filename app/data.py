@@ -21,7 +21,7 @@ WorkExperience = [
         "location": "bakersfield, ca",
         "date": "jun 2024 - present",
         "margin": "ml-[15.5rem]",
-        "tags": ["python", "java", "typeScript", "react", "azure"],
+        "tags": ["python", "java", "javascript", "react", "azure"],
         "description": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut",
     },
     {
