@@ -2,14 +2,12 @@ NavBarItems = [
     {"name": "about", "link": "/aboutme"},
     {"name": "hobbies", "link": "/hobbies"},
     {"name": "projects", "link": "/projects"},
-    {"name": "experience", "link": "/experience"},
-    {"name": "map", "link": "/map"}
 ]
 
 FooterItems = [
-    {"name": "linkedin", "link": "https://www.linkedin.com/in/jeremiahherring/"},
+    {"name": "linkedin", "link": "https://www.linkedin.com/in/ethanrong2004/"},
     {"name": "instagram", "link": "https://www.instagram.com/ethan.rng/"},
-    {"name": "github", "link": "https://github.com/jeremiahherring"},
+    {"name": "github", "link": "https://github.com/ethan-rng"},
 ]
 
 WorkExperience = [
