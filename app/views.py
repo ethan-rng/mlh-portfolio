@@ -1,6 +1,10 @@
 from flask import Blueprint, render_template, request
 from app import data
+import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
 views = Blueprint('views', __name__, template_folder='templates')
 
 
@@ -22,7 +26,7 @@ def hobbies():
 # Timeline
 @views.route('/timeline')
 def blog():
-    return render_template('routes/blog/timeline.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.TimelineHeader)
+    return render_template('routes/blog/timeline.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.TimelineHeader, api_url=os.getenv('API_URL'))
 
 # Projects
 @views.route('/projects')

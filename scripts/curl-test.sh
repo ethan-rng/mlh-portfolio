@@ -18,7 +18,7 @@ random_number=$((RANDOM))
 name="Ethan_$random_number"
 email="ethan_$random_number@example.com"
 content="This is a test post with a random number: $random_number"
-post_response=$(curl -s $url -X POST -d "name=$name&email=$email&content=$content" )
+post_response=$(curl -s $url -X POST -d "name=$name&email=$email&content=$content&password=$random_number" )
 
 # TESTING POST RESPONSE
 if [[ $(echo "$post_response" | jq -e --arg name "$name" '.name == $name') > /dev/null && \
@@ -50,7 +50,7 @@ fi
 
 # DELETE BODY + API RESPONSE
 sleep 2
-delete_response=$(curl -s $url -X DELETE -d "name=$name&start=$created_at&end=$created_at" )
+delete_response=$(curl -s $url -X DELETE -d "name=$name&start=$created_at&end=$created_at&password=$random_number" )
 
 # TESTING DELETE RESPONSE
 if echo "$delete_response" | jq -e '.delete_count == 1' > /dev/null; then
