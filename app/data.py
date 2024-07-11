@@ -2,6 +2,8 @@ NavBarItems = [
     {"name": "about", "link": "/aboutme"},
     {"name": "hobbies", "link": "/hobbies"},
     {"name": "projects", "link": "/projects"},
+    {"name": "blogs", "link": "/timeline"},
+
 ]
 
 FooterItems = [
@@ -104,3 +106,11 @@ Hobby = [
         "image": "../../static/img/hobby/traveling.jpg",
     },
 ]
+
+TimelineHeader = {
+    "title": "blogs & timeline.",
+    "subtitle": "come check my blogs/timelines!",
+    "line1": "lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut",
+    "line2": "incididunt ut labore et dolore magna aliqua. ut eni!",
+    "image": "../static/img/bg4.JPG",
+}

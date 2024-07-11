@@ -68,6 +68,5 @@ def deleteTimelinePost():
 
 
 
-if __name__ == "__main__":
-    app.register_blueprint(views)
-    app.run(debug=True, port=5001)
+app.register_blueprint(views)
+app.run(debug=True, port=5001)
