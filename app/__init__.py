@@ -55,7 +55,6 @@ def postTimelinePost():
 
 @app.route("/api/timeline_post", methods=['DELETE'])
 def deleteTimelinePost():
-    print("HIIIIII")
     name = request.form['name']
     startDate = request.form['start'].strip('"')
     endDate = request.form['end'].strip('"')

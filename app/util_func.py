@@ -1,4 +1,5 @@
 import bcrypt
+import hashlib
 
 def hash_password(password):
     # Generate a salt and hash the password
@@ -14,3 +15,4 @@ def verify_password(TimelinePost, name, input_password):
     
     except TimelinePost.DoesNotExist:
         return False
+    

@@ -1,4 +1,7 @@
 {% extends 'routes/base.html' %} {% block content %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+
 <main class="w-full flex flex-col items-center">
   {% include 'common/header.html' with context %}
 
@@ -126,182 +129,199 @@
 
 <script>
   const apiUrl = "{{ api_url }}"; // Pulled from Flask
-
-/* GET OPERATIONS */
-// Getting API Posts
-const getPosts = async () => {
-  try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) {
-      throw new Error("API Server Error " + response.statusText);
-    }
-    return await response.json();
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error);
-    return [];
+  // UTIL Functions
+  function urlToMD5(url) {
+      return CryptoJS.MD5(url).toString();
   }
-};
 
-// Render Function
-const renderPosts = async () => {
-  const fetchedPosts = await getPosts();
-  const blogContainer = document.getElementById("blog");
-  blogContainer.innerHTML = ""; // clears all content first
+  /* GET OPERATIONS */
+  // Getting API Posts
+  const getPosts = async () => {
+    try {
+      const response = await fetch(apiUrl);
+      if (!response.ok) {
+        throw new Error("API Server Error " + response.statusText);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      return [];
+    }
+  };
 
-  if (fetchedPosts.timeline_posts.length > 0) {
-    fetchedPosts.timeline_posts.forEach((post) => {
+  // Render Function
+  const renderPosts = async () => {
+    const fetchedPosts = await getPosts();
+    const blogContainer = document.getElementById("blog");
+    blogContainer.innerHTML = ""; // clears all content first
+
+    if (fetchedPosts.timeline_posts.length > 0) {
+      fetchedPosts.timeline_posts.forEach((post) => {
+        const postElement = document.createElement("div");
+        postElement.className = "mb-8 p-4 border-b border-gray-300";
+        console.log(fetchedPosts);
+
+        const content = post.content.replace(/\r?\n/g, "<br>");
+
+        postElement.innerHTML = `
+        <div class="blog-piece relative flex flex-col">
+
+          <div class='flex flex-row'>
+            <img class="rounded-full w-[5rem] h-[5rem] mr-6 border-2 border-dashed" src="https://www.gravatar.com/avatar/${urlToMD5(post.email)}?s=200&d=robohash"> </img>
+
+            <div>
+              <h2 class="text-2xl font-bold mb-2">${post.name}</h2>
+              <div class="text-l text-gray-500 flex flex-row items-center">
+                <p>${post.email} </p>
+              </div>
+              <p class="text-sm text-gray-500 mb-4"> ${post.created_at}</p>
+
+              <button id="${post.id}-delete-button" class="delete-button absolute top-0 right-0" 
+                data-name="${post.name}" data-date="${post.created_at}" data-email="${post.email}">
+                ❌
+              </button>
+            </div>
+          </div>
+
+          <p class="text-lg pl-3">${content}</p>
+
+        </div>
+        `;
+
+        blogContainer.appendChild(postElement);
+      });
+    } else {
       const postElement = document.createElement("div");
-      postElement.className = "mb-8 p-4 border-b border-gray-300";
-      console.log(fetchedPosts);
-
-      const content = post.content.replace(/\r?\n/g, "<br>");
-
       postElement.innerHTML = `
-      <div class="blog-piece relative">
-        <h2 class="text-2xl font-bold mb-2">${post.name}</h2>
-        <p class="text-sm text-gray-500 mb-4">By: ${post.email} | ${post.created_at}</p>
-        <p class="text-lg">${content}</p>
-        <button id="${post.id}-delete-button" class="delete-button absolute top-0 right-0" 
-          data-name="${post.name}" data-date="${post.created_at}" data-email="${post.email}">
-          ❌
-        </button>
+      <div class="flex flex-col justify-center items-center text-font/80">
+        <h2 class="text-4xl font-bold mb-4">looks like no one has added a blog piece so far...</h2>
+        <p class="text-2xl font-thin"> be the first to post something by sharing your thoughts below </p>
       </div>
       `;
 
       blogContainer.appendChild(postElement);
-    });
-  } else {
-    const postElement = document.createElement("div");
-    postElement.innerHTML = `
-    <div class="flex flex-col justify-center items-center text-font/80">
-      <h2 class="text-4xl font-bold mb-4">looks like no one has added a blog piece so far...</h2>
-      <p class="text-2xl font-thin"> be the first to post something by sharing your thoughts below </p>
-    </div>
-    `;
-
-    blogContainer.appendChild(postElement);
-  }
-};
-
-/* POST OPERATIONS */
-// Posting API Posts
-const postPosts = async () => {
-  try {
-    const form = document.getElementById("blog-form");
-    const formData = new FormData(form);
-    form.reset();
-
-
-    const response = await fetch(apiUrl, {
-      method: "POST",
-      body: formData,
-    });
-
-    if (!response.ok) {
-      throw new Error("API Server Error " + response.statusText);
     }
-
-    return await response.json();
-  } catch (error) {
-    console.error("There was a problem with the fetch operation:", error);
-    return [];
-  }
-};
-
-/* DELETE OPERATION */
-// Deleting API Post
-const deletePosts = async (name, start, password) => {
-  try {
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("start", start);
-    formData.append("end", start);
-    formData.append("password", password)
-
-    const response = await fetch(apiUrl, {
-      method: "DELETE",
-      body: formData,
-    });
-
-    return true;
-
-    if (!response.ok) {
-      throw new Error("API Server Error " + response.statusText);
-      return false;
-    }
-  } catch (error) {
-    console.error("There was a problem with the delete operation:", error);
-  }
-
-  return false;
-};
-
-// Delete Function
-const renderDelete = async (event) => {
-  // Extract post name from button ID
-  const postId = event.target.id.split("-")[0];
-
-  // Find associated elements and extract data
-  const name = document.getElementById(`${postId}-delete-button`).getAttribute("data-name");
-  const start_date = document.getElementById(`${postId}-delete-button`).getAttribute("data-date");
-  const email = document.getElementById(`${postId}-delete-button`).getAttribute("data-email");
-
-  // Show modal
-  const deleteModal = document.getElementById("delete-modal");
-  document.getElementById("post-details").innerHTML = `${name} By: ${email} </p>`
-  deleteModal.classList.remove("hidden");
-
-
-  const processDelete = async () => {
-    // Grabbing Confirm and Password
-    const confirm = document.getElementById('delete-confirm').value;
-    const password = document.getElementById('delete-password').value;
-
-    
-    if (confirm == "confirm") {   // Confirm delete button event listener
-      document.getElementById("confirm-delete-button").onclick = 
-        async () => {
-          if (await deletePosts(name, start_date, password)) { // Correct Password
-            deleteModal.classList.add("hidden");
-            await renderPosts();
-
-            // Clearing Out Error Messages
-            document.getElementById("failure").className = "";
-            document.getElementById("failure").innerText = "";
-          }else{  // Incorrect Password
-            document.getElementById("failure").className = "italic text-red-300 font-thin";
-            document.getElementById("failure").innerText = "password is incorrect";
-          }
-      };
-    }else{  // Non Confirm
-      document.getElementById("failure").className = "italic text-white font-thin";
-      document.getElementById("failure").innerText = "please type confirm to confirm deletion";
-    }
-  }
-
-  // EVENT LISTENER
-  document.getElementById("cancel-button").onclick = () => { 
-    document.getElementById("failure").className = "";
-    document.getElementById("failure").innerText = "";
-    deleteModal.classList.add("hidden"); 
   };
-  document.getElementById("confirm-delete-button").onclick = processDelete;
-};
 
-// EVENT LISTENERS
-document.addEventListener("DOMContentLoaded", renderPosts);
-document.getElementById("blog-form").addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await postPosts();
-  await renderPosts();
-});
+  /* POST OPERATIONS */
+  // Posting API Posts
+  const postPosts = async () => {
+    try {
+      const form = document.getElementById("blog-form");
+      const formData = new FormData(form);
+      form.reset();
 
-document.addEventListener('click', async (event) => {
-  if (event.target && event.target.classList.contains('delete-button')) {
+
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("API Server Error " + response.statusText);
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      return [];
+    }
+  };
+
+  /* DELETE OPERATION */
+  // Deleting API Post
+  const deletePosts = async (name, start, password) => {
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("start", start);
+      formData.append("end", start);
+      formData.append("password", password)
+
+      const response = await fetch(apiUrl, {
+        method: "DELETE",
+        body: formData,
+      });
+
+      return true;
+
+      if (!response.ok) {
+        throw new Error("API Server Error " + response.statusText);
+        return false;
+      }
+    } catch (error) {
+      console.error("There was a problem with the delete operation:", error);
+    }
+
+    return false;
+  };
+
+  // Delete Function
+  const renderDelete = async (event) => {
+    // Extract post name from button ID
+    const postId = event.target.id.split("-")[0];
+
+    // Find associated elements and extract data
+    const name = document.getElementById(`${postId}-delete-button`).getAttribute("data-name");
+    const start_date = document.getElementById(`${postId}-delete-button`).getAttribute("data-date");
+    const email = document.getElementById(`${postId}-delete-button`).getAttribute("data-email");
+
+    // Show modal
+    const deleteModal = document.getElementById("delete-modal");
+    document.getElementById("post-details").innerHTML = `${name} By: ${email} </p>`
+    deleteModal.classList.remove("hidden");
+
+
+    const processDelete = async () => {
+      // Grabbing Confirm and Password
+      const confirm = document.getElementById('delete-confirm').value;
+      const password = document.getElementById('delete-password').value;
+
+      
+      if (confirm == "confirm") {   // Confirm delete button event listener
+        document.getElementById("confirm-delete-button").onclick = 
+          async () => {
+            if (await deletePosts(name, start_date, password)) { // Correct Password
+              deleteModal.classList.add("hidden");
+              await renderPosts();
+
+              // Clearing Out Error Messages
+              document.getElementById("failure").className = "";
+              document.getElementById("failure").innerText = "";
+            }else{  // Incorrect Password
+              document.getElementById("failure").className = "italic text-red-300 font-thin";
+              document.getElementById("failure").innerText = "password is incorrect";
+            }
+        };
+      }else{  // Non Confirm
+        document.getElementById("failure").className = "italic text-white font-thin";
+        document.getElementById("failure").innerText = "please type confirm to confirm deletion";
+      }
+    }
+
+    // EVENT LISTENER
+    document.getElementById("cancel-button").onclick = () => { 
+      document.getElementById("failure").className = "";
+      document.getElementById("failure").innerText = "";
+      deleteModal.classList.add("hidden"); 
+    };
+    document.getElementById("confirm-delete-button").onclick = processDelete;
+  };
+
+  // EVENT LISTENERS
+  document.addEventListener("DOMContentLoaded", renderPosts);
+  document.getElementById("blog-form").addEventListener("submit", async (event) => {
     event.preventDefault();
-    await renderDelete(event);
-  }
-});
+    await postPosts();
+    await renderPosts();
+  });
+
+  document.addEventListener('click', async (event) => {
+    if (event.target && event.target.classList.contains('delete-button')) {
+      event.preventDefault();
+      await renderDelete(event);
+    }
+  });
 
 </script>
 {% endblock %}
