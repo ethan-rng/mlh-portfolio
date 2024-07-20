@@ -16,3 +16,5 @@ def verify_password(TimelinePost, name, input_password):
     except TimelinePost.DoesNotExist:
         return False
     
+def validate_email(email):
+    return "@" in email and "." in email

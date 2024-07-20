@@ -46,10 +46,24 @@ def getTimelinePost():
 
 @app.route("/api/timeline_post", methods=['POST'])
 def postTimelinePost():
+
+    # Validate the inforamtion
+    if "name" not in request.form or len(request.form['name']) == 0:
+        return {"result": "Invalid name"}, 400
+    if "email" not in request.form or len(request.form['email']) == 0:
+        return {"result": "Invalid email"}, 400
+    if "content" not in request.form or len(request.form['content']) == 0:
+        return {"result": "Invalid content"}, 400
+    if "password" not in request.form or len(request.form['password']) == 0:
+        return {"result": "Invalid password"}, 400
+    
     name = request.form['name']
     email = request.form['email']
     content = request.form['content']
     password = request.form['password']
+
+    if not validate_email(email):
+        return {"result": "Invalid email"}, 400
 
     timeline_post = TimelinePost.create(name=name, email=email, content=content, password=hash_password(password).decode('utf-8'))
 
