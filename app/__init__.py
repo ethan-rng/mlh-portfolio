@@ -11,14 +11,17 @@ import datetime
 app = Flask(__name__)
 
 # Setup of Database
-mydb = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306
-)
-
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306
+    )
 
 # ORM Models
 class TimelinePost(Model):
@@ -80,4 +83,5 @@ def deleteTimelinePost():
 
 
 app.register_blueprint(views)
-app.run(debug=True, port=5001)
+if __name__ == "__main__":
+    app.run(debug=True, port=5001)
