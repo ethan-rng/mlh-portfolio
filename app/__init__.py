@@ -2,37 +2,15 @@ from flask import Flask, jsonify, request
 from playhouse.shortcuts import model_to_dict
 from app.views import views
 from app.util_func import *
-from peewee import *
-import os
+from utils.db import mydb
+from models.Timeline import TimelinePost
 import datetime
+import os
 
 
 # Initializing App
 app = Flask(__name__)
 
-# Setup of Database
-if os.getenv("TESTING") == "true":
-    print("Running in test mode")
-    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
-else:
-    mydb = MySQLDatabase(
-        os.getenv("MYSQL_DATABASE"),
-        user=os.getenv("MYSQL_USER"),
-        password=os.getenv("MYSQL_PASSWORD"),
-        host=os.getenv("MYSQL_HOST"),
-        port=3306
-    )
-
-# ORM Models
-class TimelinePost(Model):
-    name = CharField( )
-    email = CharField()
-    content = TextField()
-    password = TextField()
-    created_at = DateTimeField(default=datetime.datetime.now)
-
-    class Meta:
-        database = mydb
 
 mydb.connect()
 mydb.create_tables([TimelinePost])
@@ -76,12 +54,13 @@ def deleteTimelinePost():
     startDate = request.form['start'].strip('"')
     endDate = request.form['end'].strip('"')
     password = request.form['password']
+    print(password)
 
     if password == os.getenv("ULT_PASSWORD"):
          query = TimelinePost.delete()
     else:
         if not verify_password(TimelinePost, name, password):
-            return {"result": "Password verification failed"}
+            return {"result": "Password verification failed"}, 400
 
         # Convert start_date and end_date to datetime objects
         start_date = datetime.datetime.strptime(startDate, '%a, %d %b %Y %H:%M:%S %Z')
@@ -92,7 +71,9 @@ def deleteTimelinePost():
             (TimelinePost.created_at.between(start_date, end_date))
         )
 
-    return jsonify({ "delete_count": query.execute() })
+    count = query.execute()
+    print(count)
+    return jsonify({ "result": "Success", "delete_count": count })
 
 
 
