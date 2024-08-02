@@ -25,7 +25,7 @@ def getTimelinePost():
 @app.route("/api/timeline_post", methods=['POST'])
 def postTimelinePost():
 
-    # Validate the inforamtion
+    # Validate the information
     if "name" not in request.form or len(request.form['name']) == 0:
         return {"result": "Invalid name"}, 400
     if "email" not in request.form or len(request.form['email']) == 0:
