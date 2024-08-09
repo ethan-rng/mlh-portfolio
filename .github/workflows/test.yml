@@ -25,9 +25,9 @@ jobs:
             
             - name: Setup Python Venv
               run: python -m venv python3-virtualenv
-              
+
             - name: Install Dependencies
               run: python3-virtualenv/bin/pip install -r requirements.txt
 
             - name: Run Tests
-              run: ./scripts/run_test.sh
+              run: ./scripts/run-test.sh
