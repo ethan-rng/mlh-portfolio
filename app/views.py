@@ -33,7 +33,7 @@ def blog():
 def project():
     return render_template('routes/projects/projects.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.ProjectsHeader, projects=data.Projects )
 
-# Projects
+# Test
 @views.route('/test')
 def test():
     return render_template('routes/projects/projects.html', navbar=data.NavBarItems, footer=data.FooterItems, data=data.ProjectsHeader, projects=data.Projects )

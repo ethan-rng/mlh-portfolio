@@ -1,5 +1,5 @@
 NavBarItems = [
-    {"name": "about", "link": "/aboutme"},
+    {"name": "about me", "link": "/aboutme"},
     {"name": "hobbies", "link": "/hobbies"},
     {"name": "projects", "link": "/projects"},
     {"name": "blogs", "link": "/timeline"},

@@ -76,7 +76,6 @@ def deleteTimelinePost():
         )
 
     count = query.execute()
-    print(count)
     return jsonify({ "result": "Success", "delete_count": count })
 
 
