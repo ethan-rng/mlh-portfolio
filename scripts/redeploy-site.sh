@@ -4,6 +4,8 @@
 # Ending All Exisiting Tmux sessions
 # tmux kill-server && echo "1. Killed All Running Servers Successfully"
 
+cd ~/mlh-portfolio
+
 # Fetching From Github
 git fetch && git reset origin/main --hard && echo "2. Grabbed Remote Branch Successfully"
 
