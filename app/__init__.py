@@ -6,7 +6,11 @@ from utils.db import mydb
 from models.Timeline import TimelinePost
 import datetime
 import os
+from dotenv import load_dotenv
 
+
+load_dotenv()
+print(os.getenv('API_URL'))
 
 # Initializing App
 app = Flask(__name__)

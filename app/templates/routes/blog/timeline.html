@@ -129,6 +129,7 @@
 
 <script>
   const apiUrl = "{{ api_url }}"; // Pulled from Flask
+  console.log(apiUrl);
   // UTIL Functions
   function urlToMD5(url) {
       return CryptoJS.MD5(url).toString();
