@@ -27,6 +27,12 @@ jobs:
                 SSH_USER: ${{ secrets.SSH_USER }}
                 SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
                 SSH_IP: ${{ secrets.SSH_IP }}
+
+            - name: Connecting to SSH
+              run: ssh my-vps
             
-            - name: Deploy site
-              run: ssh my-vps '~/mlh-portfolio/scripts/redeploy-site.sh'
+            - name: Granting Access
+              run: chmod +x ~/mlh-portfolio/scripts/redeploy-tests.sh
+            
+            - name: Running Redeploy Script
+              run: cd ~/mlh-portfolio/scripts/redeploy-site.sh
