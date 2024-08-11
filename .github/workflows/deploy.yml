@@ -1,3 +1,4 @@
+
 name: Deploy
 
 on:
@@ -30,10 +31,5 @@ jobs:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
           SSH_IP: ${{ secrets.SSH_IP }}
 
-      - name: SSH Into VPS
-        run: ssh my-vps 
-        
-      - name: Deployment
-        run: ls -l ~/redeploy-site.sh && ~/redeploy-site.sh
-
-   
+      - name: Deploy site
+        run: ssh my-vps '~/redeploy-site.sh'
