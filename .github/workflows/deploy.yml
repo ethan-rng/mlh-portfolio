@@ -34,6 +34,6 @@ jobs:
         run: ssh my-vps 
         
       - name: Deployment
-        run: ls -l redeploy-site.sh && ~/redeploy-site.sh
+        run: ls -l ~/redeploy-site.sh && ~/redeploy-site.sh
 
    
