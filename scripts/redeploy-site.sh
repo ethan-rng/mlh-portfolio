@@ -15,7 +15,7 @@ docker compose -f docker-compose.prod.yml down
 docker compose -f docker-compose.prod.yml up -d --build
 
 
-# ARCHIVED
+# ARCHIVED CODE
 # Starting Up Virtual Env and Installing Dependecies
 # source python3-virtualenv/bin/activate && pip install -r "requirements.txt" && echo "3. Activated Virtual Env and Updated Dependencies"
 
