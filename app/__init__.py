@@ -16,8 +16,29 @@ print(os.getenv('API_URL'))
 app = Flask(__name__)
 
 
-mydb.connect()
-mydb.create_tables([TimelinePost])
+def init_db():
+    """Initialize database connection and create tables"""
+    try:
+        mydb.connect(reuse_if_open=True)
+        mydb.create_tables([TimelinePost], safe=True)
+    except Exception as e:
+        print(f"Warning: Could not connect to database: {e}")
+        print("Database operations will fail until connection is available.")
+
+
+# Try to initialize database, but don't crash if it fails
+init_db()
+
+
+@app.before_request
+def ensure_db_connection():
+    """Ensure database is connected before handling requests"""
+    try:
+        mydb.connect(reuse_if_open=True)
+    except Exception as e:
+        # If connection fails, log it but don't crash
+        # Individual routes will handle database errors
+        pass
 
 
 # Database Paths
@@ -83,4 +104,5 @@ def deleteTimelinePost():
 app.register_blueprint(views)
 
 if __name__ == "__main__":
+    print("STARTING SERVER")
     app.run(debug=True, host='0.0.0.0', port=5001)
